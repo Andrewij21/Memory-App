@@ -38,13 +38,7 @@
         "description": "              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores maiores officiis quae distinctio ipsa vitae nobis consectetur dolor enim in!",
         "price": 465,
         "image": "https://tcproduction.blob.core.windows.net/media/%7B240f8b72-1159-4fd3-a150-0a837f50ba4a%7D.2573758641_297d6d19fa_o.jpg"
-      }
-    ]
-  },
-  {
-    "id": 2,
-    "name": "Favorites",
-    "photos": [
+      },
       {
         "id": 4,
         "name": "All Around the World",
@@ -53,15 +47,6 @@
         "description": "              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores maiores officiis quae distinctio ipsa vitae nobis consectetur dolor enim in!",
         "price": 465,
         "image": "https://assets.simpleviewcms.com/simpleview/image/upload/c_limit,h_1200,q_75,w_1200/v1/clients/lasvegas/strip_b86ddbea-3add-4995-b449-ac85d700b027.jpg"
-      },
-      {
-        "id": 5,
-        "name": "View the Casinos",
-        "date": "5/12/2023",
-        "rating": 4.5,
-        "description": "              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores maiores officiis quae distinctio ipsa vitae nobis consectetur dolor enim in!",
-        "price": 465,
-        "image": "https://s3.amazonaws.com/virginhotelslv.com/content/uploads/2021/04/Website-Hero-Images-Mohegan-Sun-B-1300x420-1.jpg"
       },
       {
         "id": 6,
