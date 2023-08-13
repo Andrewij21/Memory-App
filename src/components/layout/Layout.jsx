@@ -1,3 +1,4 @@
+import FooterNavigation from "./FooterNavigation";
 import MainNavigation from "./MainNavigation";
 import PropTypes from "prop-types";
 
@@ -6,6 +7,7 @@ const Layout = (props) => {
     <>
       <MainNavigation />
       <main>{props.children}</main>
+      <FooterNavigation />
     </>
   );
 };
