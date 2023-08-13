@@ -1,4 +1,4 @@
-import { Delete } from "@mui/icons-material";
+import { Delete, MoreVert } from "@mui/icons-material";
 import {
   Box,
   Card,
@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
 
 const MeetupItem = ({ photo }) => {
   return (
-    <Grid item xs={3}>
+    <Grid item xs={4}>
       <Card sx={{ maxWidth: 345, minHeight: 380 }} raised>
         <CardMedia
           component="img"
@@ -25,9 +25,14 @@ const MeetupItem = ({ photo }) => {
             <Typography gutterBottom variant="h6" component="h3">
               {photo.name}
             </Typography>
-            <IconButton aria-label="delete" color="error" size="small">
-              <Delete fontSize="small" />
-            </IconButton>
+            <Box>
+              <IconButton aria-label="delete" color="error" size="small">
+                <Delete fontSize="small" />
+              </IconButton>
+              <IconButton aria-label="more" size="small">
+                <MoreVert fontSize="small" />
+              </IconButton>
+            </Box>
           </Box>
 
           <Box>
