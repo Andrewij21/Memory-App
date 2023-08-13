@@ -1,19 +1,14 @@
-import { Container, Typography } from "@mui/material";
-import MeetupList from "./components/meetups/MeetupList";
+import Layout from "./components/layout/Layout";
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
 
 function App() {
   return (
-    <Container>
-      <Typography
-        component="h1"
-        variant="h4"
-        fontWeight="bold"
-        marginBottom={3}
-      >
-        Recents
-      </Typography>
-      <MeetupList />
-    </Container>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </Layout>
   );
 }
 
