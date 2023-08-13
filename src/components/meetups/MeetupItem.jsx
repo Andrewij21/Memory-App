@@ -8,20 +8,22 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
+import PropTypes from "prop-types";
 
-const MeetupItem = () => {
+const MeetupItem = ({ photo }) => {
   return (
     <Grid item xs={3}>
-      <Card sx={{ maxWidth: 345 }} raised>
+      <Card sx={{ maxWidth: 345, minHeight: 380 }} raised>
         <CardMedia
           component="img"
-          alt="green iguana"
-          image="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg"
+          height={150}
+          alt={photo.name}
+          image={photo.image}
         />
         <CardContent>
           <Box display="flex" justifyContent="space-between">
             <Typography gutterBottom variant="h6" component="h3">
-              Lizard
+              {photo.name}
             </Typography>
             <IconButton aria-label="delete" color="error" size="small">
               <Delete fontSize="small" />
@@ -29,8 +31,11 @@ const MeetupItem = () => {
           </Box>
 
           <Box>
-            <Typography variant="body2" color="text.secondary" component="p">
-              Lorem ipsum dolor sit, amet consectetur adipisicing.
+            <Typography variant="caption" color="text.secondary" component="p">
+              {photo.date}
+            </Typography>
+            <Typography variant="body2" component="p">
+              {photo.description}
             </Typography>
           </Box>
         </CardContent>
@@ -39,4 +44,7 @@ const MeetupItem = () => {
   );
 };
 
+MeetupItem.propTypes = {
+  photo: PropTypes.object,
+};
 export default MeetupItem;

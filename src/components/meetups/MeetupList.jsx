@@ -1,14 +1,18 @@
 import { Grid } from "@mui/material";
 import MeetupItem from "./MeetupItem";
-const MeetupList = () => {
+import PropTypes from "prop-types";
+
+const MeetupList = ({ photos }) => {
   return (
     <Grid container spacing={5}>
-      <MeetupItem />
-      <MeetupItem />
-      <MeetupItem />
-      <MeetupItem />
+      {photos.map((photo) => {
+        return <MeetupItem photo={photo} key={photo.id} />;
+      })}
     </Grid>
   );
 };
 
+MeetupList.propTypes = {
+  photos: PropTypes.array,
+};
 export default MeetupList;
