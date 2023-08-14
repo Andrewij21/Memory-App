@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import MeetupItem from "./MeetupItem";
+import MeetupItem from "./AlbumItem";
 import PropTypes from "prop-types";
 
 const MeetupList = ({ photos }) => {
