@@ -6,9 +6,15 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import CameraIcon from "@mui/icons-material/CameraAlt";
 import { AccountCircle } from "@mui/icons-material";
+import { Link as LinkBase } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export default function MainNavigation() {
-  const pages = ["Album", "New Album", "menu"];
+  const pages = [
+    { name: "Album", path: "/" },
+    { name: "New Photo", path: "/new-photo" },
+    { name: "menu", path: "/#" },
+  ];
   return (
     <Box sx={{ flexGrow: 1, marginBottom: 3 }}>
       <AppBar position="static">
@@ -39,8 +45,15 @@ export default function MainNavigation() {
             }}
           >
             {pages.map((page) => (
-              <Button key={page} sx={{ my: 2, color: "white" }}>
-                {page}
+              <Button key={page.name} sx={{ my: 2, color: "white" }}>
+                <LinkBase
+                  component={Link}
+                  color="inherit"
+                  underline="none"
+                  to={page.path}
+                >
+                  {page.name}
+                </LinkBase>
               </Button>
             ))}
           </Box>
