@@ -1,14 +1,13 @@
-// import Box from "@mui/material/Box";
-import { Paper, Typography, Link } from "@mui/material";
-// import { Link } from "react-router-dom";
+import { Paper, Typography, Link as LinkBase } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function Copyright() {
   return (
     <Typography variant="body2" align="center">
       {"Copyright © "}
-      <Link color="inherit" to="https://mui.com/">
+      <LinkBase component={Link} color="inherit" to="https://mui.com/">
         Your Website
-      </Link>{" "}
+      </LinkBase>{" "}
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -19,7 +18,7 @@ export default function FooterNavigation() {
     <Paper
       sx={{
         py: 3,
-        mt: 3,
+        mt: 10,
         backgroundColor: "primary.dark",
         color: "white",
       }}
