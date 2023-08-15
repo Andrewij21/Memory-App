@@ -19,6 +19,21 @@ const Home = () => {
         setAlbums(loadedAlbums);
       });
   }, []);
+
+  function removeItemHandler(id) {
+    fetch(
+      `https://react-album-1a909-default-rtdb.firebaseio.com/albums/${id}.json`,
+      {
+        method: "DELETE",
+      }
+    ).then(() => {
+      console.log("Data dihapus");
+      setAlbums((prevPhoto) => {
+        return prevPhoto.filter((photo) => photo.id !== id);
+      });
+    });
+  }
+
   return (
     <>
       <Typography
@@ -29,7 +44,7 @@ const Home = () => {
       >
         Albums
       </Typography>
-      <AlbumList photos={albums} />
+      <AlbumList photos={albums} removeItem={removeItemHandler} />
     </>
   );
 };

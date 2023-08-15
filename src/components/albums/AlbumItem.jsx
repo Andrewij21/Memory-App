@@ -11,7 +11,11 @@ import {
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 
-const AlbumItem = ({ photo }) => {
+const AlbumItem = ({ photo, removeItem }) => {
+  function removeItemHandler() {
+    removeItem(photo.id);
+  }
+
   return (
     <Grid item xs={4}>
       <Card sx={{ maxWidth: 345, minHeight: 380 }} raised>
@@ -38,6 +42,7 @@ const AlbumItem = ({ photo }) => {
                 color="error"
                 size="small"
                 disableRipple
+                onClick={removeItemHandler}
               >
                 <Delete fontSize="small" />
               </IconButton>
@@ -63,5 +68,6 @@ const AlbumItem = ({ photo }) => {
 
 AlbumItem.propTypes = {
   photo: PropTypes.object,
+  removeItem: PropTypes.func,
 };
 export default AlbumItem;
