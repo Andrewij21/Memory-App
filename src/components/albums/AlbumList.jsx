@@ -2,7 +2,7 @@ import { Grid } from "@mui/material";
 import MeetupItem from "./AlbumItem";
 import PropTypes from "prop-types";
 
-const MeetupList = ({ photos }) => {
+const AlbumList = ({ photos }) => {
   return (
     <Grid container spacing={5}>
       {photos.map((photo) => {
@@ -12,7 +12,7 @@ const MeetupList = ({ photos }) => {
   );
 };
 
-MeetupList.propTypes = {
+AlbumList.propTypes = {
   photos: PropTypes.array,
 };
-export default MeetupList;
+export default AlbumList;
