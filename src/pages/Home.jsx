@@ -1,10 +1,9 @@
-import { Container, Typography } from "@mui/material";
-import MeetupList from "../components/albums/AlbumList";
-// import data from "../data.json";
+import { Typography } from "@mui/material";
+import AlbumList from "../components/albums/AlbumList";
 import { useEffect, useState } from "react";
 
 const Home = () => {
-  let [albums, setAlbums] = useState([]);
+  const [albums, setAlbums] = useState([]);
   useEffect(() => {
     fetch("https://react-album-1a909-default-rtdb.firebaseio.com/albums.json")
       .then((res) => {
@@ -21,23 +20,17 @@ const Home = () => {
       });
   }, []);
   return (
-    <Container>
-      {albums.map((album) => {
-        return (
-          <div key={album.id}>
-            <Typography
-              component="h1"
-              variant="h4"
-              fontWeight="bold"
-              marginBottom={3}
-            >
-              {album.name}
-            </Typography>
-            <MeetupList photos={album.photos} />
-          </div>
-        );
-      })}
-    </Container>
+    <>
+      <Typography
+        component="h1"
+        variant="h4"
+        fontWeight="bold"
+        marginBottom={3}
+      >
+        Albums
+      </Typography>
+      <AlbumList photos={albums} />
+    </>
   );
 };
 
