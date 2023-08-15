@@ -1,3 +1,4 @@
+import { Container } from "@mui/material";
 import FooterNavigation from "./FooterNavigation";
 import MainNavigation from "./MainNavigation";
 import PropTypes from "prop-types";
@@ -6,7 +7,9 @@ const Layout = (props) => {
   return (
     <>
       <MainNavigation />
-      <main style={{ minHeight: "100vh" }}>{props.children}</main>
+      <Container component="main" sx={{ minHeight: "100vh" }}>
+        {props.children}
+      </Container>
       <FooterNavigation />
     </>
   );
