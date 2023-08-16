@@ -1,4 +1,4 @@
-@BASE_URL = https://react-album-1a909-default-rtdb.firebaseio.com/albums.json
+@BASE_URL = https://react-album-1a909-default-rtdb.firebaseio.com/albums
 
 
 
@@ -48,12 +48,12 @@
 POST {{BASE_URL}} 
 Content-Type: application/json
 
- {
-        "name": "The Falls at Night",
-        "date": "2/12/2023",
-        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores maiores officiis quae distinctio ipsa vitae nobis consectetur dolor enim in!",
-        "image": "https://assets.simpleviewcms.com/simpleview/image/upload/c_limit,h_1200,q_75,w_1200/v1/clients/lasvegas/strip_b86ddbea-3add-4995-b449-ac85d700b027.jpg"
-  }
+  {
+          "name": "Show me the Magic",
+         "date": "8/12/2023",
+         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores maiores officiis quae distinctio ipsa vitae nobis consectetur dolor enim in!",
+         "image": "https://footwearnews.com/wp-content/uploads/2020/10/magic-trade-show-las-vegas.jpg"
+       }
 
 
 
@@ -62,3 +62,11 @@ GET {{BASE_URL}}
 
 ###
 DELETE {{BASE_URL}}/-NbrkdiNdNtTDcded5Dp.json
+
+###
+PATCH  {{BASE_URL}}/-NbroQGRFzu8fE6gAT5D.json 
+Content-Type: application/json
+
+  {
+         "description": "edit bang"
+       }
