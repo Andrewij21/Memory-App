@@ -49,7 +49,10 @@ const AlbumItem = ({ photo, removeItem, editItem }) => {
             display="flex"
             justifyContent="space-between"
             alignItems="center"
-            sx={{ minHeight: 70 }}
+            sx={{
+              flexGrow: 1,
+              my: 2,
+            }}
           >
             <Typography gutterBottom variant="h5" component="h2">
               {photo.name}
