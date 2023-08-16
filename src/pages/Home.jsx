@@ -36,12 +36,7 @@ const Home = () => {
 
   return (
     <>
-      <Typography
-        component="h1"
-        variant="h4"
-        fontWeight="bold"
-        marginBottom={3}
-      >
+      <Typography component="h1" variant="h4" fontWeight="bold" gutterBottom>
         Albums
       </Typography>
       <AlbumList photos={albums} removeItem={removeItemHandler} />
