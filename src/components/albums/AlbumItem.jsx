@@ -83,8 +83,19 @@ const AlbumItem = ({ photo, removeItem, editItem }) => {
                   <MoreVert fontSize="small" />
                 </IconButton>
               </Tooltip>
-              <Modal open={open} onClose={toglleModal}>
-                <Box>
+              <Modal
+                open={open}
+                onClose={toglleModal}
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <Box
+                  sx={{
+                    height: 0,
+                  }}
+                >
                   <AlbumForm
                     title={"Edit Photo"}
                     detail={photo}

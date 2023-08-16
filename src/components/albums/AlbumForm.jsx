@@ -36,9 +36,9 @@ const AlbumForm = ({ addItem, editItem, title, detail, closeModal }) => {
   return (
     <Box
       sx={{
-        position: "absolute",
-        left: "50%",
-        transform: "translate(-50%)",
+        // position: "absolute",
+        // left: "50%",
+        // transform: "translate(-50%)",
         marginTop: 5,
       }}
     >
@@ -46,7 +46,6 @@ const AlbumForm = ({ addItem, editItem, title, detail, closeModal }) => {
         elevation={3}
         sx={{
           p: 5,
-          width: 600,
         }}
       >
         <Typography component="h1" variant="h4">
