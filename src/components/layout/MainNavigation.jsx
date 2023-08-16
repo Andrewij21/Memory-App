@@ -13,7 +13,7 @@ export default function MainNavigation() {
   const pages = [
     { name: "Album", path: "/" },
     { name: "New Photo", path: "/new-photo" },
-    { name: "menu", path: "/#" },
+    // { name: "menu", path: "/#" },
   ];
   return (
     <Box sx={{ flexGrow: 1, marginBottom: 3 }}>
