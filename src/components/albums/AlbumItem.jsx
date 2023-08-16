@@ -1,15 +1,10 @@
 import { Delete, MoreVert } from "@mui/icons-material";
 import {
   Box,
-  Button,
   Card,
   CardContent,
   CardMedia,
   Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
   Grid,
   IconButton,
   Modal,
@@ -20,6 +15,7 @@ import dayjs from "dayjs";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import AlbumForm from "./AlbumForm";
+import AlertDialog from "../ui/AlertDialog";
 
 const AlbumItem = ({ photo, removeItem, editItem }) => {
   const [open, setOpen] = useState(false);
@@ -68,41 +64,8 @@ const AlbumItem = ({ photo, removeItem, editItem }) => {
                   <Delete fontSize="small" />
                 </IconButton>
               </Tooltip>
-              <Dialog
-                fullWidth
-                open={openDialog}
-                onClose={toggleDialog}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-              >
-                <DialogTitle color="error" id="alert-dialog-title">
-                  {"Delete Item"}
-                </DialogTitle>
-                <DialogContent>
-                  <DialogContentText
-                    color="InfoText"
-                    id="alert-dialog-description"
-                  >
-                    Are you sure want to delete item?
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Button
-                    onClick={() => removeItemHandler(false)}
-                    variant="contained"
-                    color="text"
-                  >
-                    Cancle
-                  </Button>
-                  <Button
-                    onClick={() => removeItemHandler(true)}
-                    autoFocus
-                    variant="contained"
-                    color="error"
-                  >
-                    Delete
-                  </Button>
-                </DialogActions>
+              <Dialog fullWidth open={openDialog} onClose={toggleDialog}>
+                <AlertDialog removeItem={removeItemHandler} />
               </Dialog>
               <Tooltip title="Edit">
                 <IconButton
