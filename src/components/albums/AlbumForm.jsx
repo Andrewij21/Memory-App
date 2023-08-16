@@ -11,7 +11,7 @@ import { Paper } from "@mui/material";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 
-const AlbumForm = ({ addPhoto, title }) => {
+const AlbumForm = ({ addItem, editItem, title, detail, closeModal }) => {
   const name = useRef();
   const image = useRef();
   const description = useRef();
@@ -26,7 +26,11 @@ const AlbumForm = ({ addPhoto, title }) => {
       date: date.toJSON(),
     };
     // console.log(photo);
-    addPhoto(photo);
+    if (detail.id !== null) {
+      closeModal();
+      return editItem({ ...photo, id: detail.id });
+    }
+    addItem(photo);
   };
 
   return (
@@ -53,6 +57,7 @@ const AlbumForm = ({ addPhoto, title }) => {
             <Grid item xs={12}>
               <TextField
                 name="name"
+                defaultValue={detail.name}
                 inputRef={name}
                 required
                 fullWidth
@@ -65,6 +70,7 @@ const AlbumForm = ({ addPhoto, title }) => {
               <TextField
                 required
                 fullWidth
+                defaultValue={detail.image}
                 inputRef={image}
                 type="url"
                 label="image"
@@ -85,6 +91,7 @@ const AlbumForm = ({ addPhoto, title }) => {
             <Grid item xs={12}>
               <TextField
                 name="description"
+                defaultValue={detail.description}
                 inputRef={description}
                 fullWidth
                 label="Description"
@@ -109,7 +116,13 @@ const AlbumForm = ({ addPhoto, title }) => {
 };
 
 AlbumForm.propTypes = {
-  addPhoto: PropTypes.func,
+  addItem: PropTypes.func,
+  editItem: PropTypes.func,
+  closeModal: PropTypes.func,
   title: PropTypes.string,
+  detail: PropTypes.object,
+  name: PropTypes.string,
+  image: PropTypes.string,
+  description: PropTypes.string,
 };
 export default AlbumForm;
