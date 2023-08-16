@@ -26,7 +26,7 @@ const AlbumForm = ({ addItem, editItem, title, detail, closeModal }) => {
       date: date.toJSON(),
     };
     // console.log(photo);
-    if (detail.id !== null) {
+    if (detail?.id) {
       closeModal();
       return editItem({ ...photo, id: detail.id });
     }
@@ -52,12 +52,12 @@ const AlbumForm = ({ addItem, editItem, title, detail, closeModal }) => {
         <Typography component="h1" variant="h4">
           {title}
         </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
                 name="name"
-                defaultValue={detail.name}
+                defaultValue={detail?.name}
                 inputRef={name}
                 required
                 fullWidth
@@ -70,7 +70,7 @@ const AlbumForm = ({ addItem, editItem, title, detail, closeModal }) => {
               <TextField
                 required
                 fullWidth
-                defaultValue={detail.image}
+                defaultValue={detail?.image}
                 inputRef={image}
                 type="url"
                 label="image"
@@ -91,7 +91,7 @@ const AlbumForm = ({ addItem, editItem, title, detail, closeModal }) => {
             <Grid item xs={12}>
               <TextField
                 name="description"
-                defaultValue={detail.description}
+                defaultValue={detail?.description}
                 inputRef={description}
                 fullWidth
                 label="Description"
@@ -107,7 +107,7 @@ const AlbumForm = ({ addItem, editItem, title, detail, closeModal }) => {
             variant="contained"
             sx={{ mt: 4, mb: 1 }}
           >
-            Add Photo
+            {title}
           </Button>
         </Box>
       </Paper>
