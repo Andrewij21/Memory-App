@@ -33,11 +33,14 @@ const AlbumItem = ({ photo, removeItem, editItem }) => {
   }
 
   return (
-    <Grid item xs={4}>
-      <Card sx={{ maxWidth: 345, minHeight: 380 }} raised>
+    <Grid item xs={12} sm={6} md={4}>
+      <Card
+        sx={{ height: "100%", display: "flex", flexDirection: "column" }}
+        raised
+      >
         <CardMedia
           component="img"
-          height={150}
+          // height={150}
           alt={photo.name}
           image={photo.image}
         />
@@ -48,7 +51,7 @@ const AlbumItem = ({ photo, removeItem, editItem }) => {
             alignItems="center"
             sx={{ minHeight: 70 }}
           >
-            <Typography gutterBottom variant="h6" component="h3">
+            <Typography gutterBottom variant="h5" component="h2">
               {photo.name}
             </Typography>
 
