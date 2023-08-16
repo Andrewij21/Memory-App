@@ -6,34 +6,36 @@ import Typography from "@mui/material/Typography";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Paper } from "@mui/material";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 
-const AlbumForm = ({ addPhoto }) => {
+const AlbumForm = ({ addPhoto, title }) => {
+  const name = useRef();
+  const image = useRef();
+  const description = useRef();
   const [date, setDate] = useState(dayjs);
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
     const photo = {
-      name: data.get("title"),
-      image: data.get("image"),
-      description: data.get("description"),
+      name: name.current.value,
+      image: image.current.value,
+      description: description.current.value,
       date: date.toJSON(),
     };
-    console.log();
+    // console.log(photo);
     addPhoto(photo);
   };
 
   return (
     <Box
       sx={{
-        // bgcolor: "red",
-        marginTop: 8,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
+        position: "absolute",
+        left: "50%",
+        transform: "translate(-50%)",
+        marginTop: 5,
       }}
     >
       <Paper
@@ -44,13 +46,14 @@ const AlbumForm = ({ addPhoto }) => {
         }}
       >
         <Typography component="h1" variant="h4">
-          Add Photo
+          {title}
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                name="title"
+                name="name"
+                inputRef={name}
                 required
                 fullWidth
                 label="Title"
@@ -62,6 +65,7 @@ const AlbumForm = ({ addPhoto }) => {
               <TextField
                 required
                 fullWidth
+                inputRef={image}
                 type="url"
                 label="image"
                 name="image"
@@ -81,10 +85,11 @@ const AlbumForm = ({ addPhoto }) => {
             <Grid item xs={12}>
               <TextField
                 name="description"
+                inputRef={description}
                 fullWidth
                 label="Description"
                 multiline
-                rows={4}
+                rows={3}
                 placeholder="Input description"
               />
             </Grid>
@@ -93,7 +98,7 @@ const AlbumForm = ({ addPhoto }) => {
             type="submit"
             // fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 4, mb: 1 }}
           >
             Add Photo
           </Button>
@@ -105,5 +110,6 @@ const AlbumForm = ({ addPhoto }) => {
 
 AlbumForm.propTypes = {
   addPhoto: PropTypes.func,
+  title: PropTypes.string,
 };
 export default AlbumForm;
