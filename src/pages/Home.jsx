@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 
 const Home = () => {
   const [albums, setAlbums] = useState([]);
+  const [refresh, setRefresh] = useState(false);
+
   useEffect(() => {
     fetch("https://react-album-1a909-default-rtdb.firebaseio.com/albums.json")
       .then((res) => {
@@ -18,7 +20,7 @@ const Home = () => {
         // console.log(loadedAlbums);
         setAlbums(loadedAlbums);
       });
-  }, []);
+  }, [refresh]);
 
   function removeItemHandler(id) {
     fetch(
@@ -28,18 +30,37 @@ const Home = () => {
       }
     ).then(() => {
       console.log("Data dihapus");
-      setAlbums((prevPhoto) => {
-        return prevPhoto.filter((photo) => photo.id !== id);
-      });
+      setRefresh(!refresh);
+      // setAlbums((prevPhoto) => {
+      //   return prevPhoto.filter((photo) => photo.id !== id);
+      // });
     });
   }
-
+  function editItemHandler(editPhoto) {
+    fetch(
+      `https://react-album-1a909-default-rtdb.firebaseio.com/albums/${editPhoto.id}.json`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(editPhoto),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then(() => {
+      setRefresh(!refresh);
+      console.log("Data diedit");
+    });
+  }
   return (
     <>
       <Typography component="h1" variant="h4" fontWeight="bold" gutterBottom>
         Albums
       </Typography>
-      <AlbumList photos={albums} removeItem={removeItemHandler} />
+      <AlbumList
+        photos={albums}
+        removeItem={removeItemHandler}
+        editItem={editItemHandler}
+      />
     </>
   );
 };
