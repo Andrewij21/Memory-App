@@ -16,5 +16,5 @@ export default function NewPhoto() {
     });
   };
 
-  return <AlbumForm addPhoto={addPhotoHandler} />;
+  return <AlbumForm addPhoto={addPhotoHandler} title={"Add Photo"} />;
 }
