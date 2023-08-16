@@ -1,9 +1,15 @@
 import { Delete, MoreVert } from "@mui/icons-material";
 import {
   Box,
+  Button,
   Card,
   CardContent,
   CardMedia,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   Grid,
   IconButton,
   Modal,
@@ -17,12 +23,14 @@ import AlbumForm from "./AlbumForm";
 
 const AlbumItem = ({ photo, removeItem, editItem }) => {
   const [open, setOpen] = useState(false);
-  const toglleModal = () => {
-    console.log("masuk");
-    setOpen(!open);
-  };
-  function removeItemHandler() {
-    removeItem(photo.id);
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const toglleModal = () => setOpen(!open);
+  const toggleDialog = () => setOpenDialog(!openDialog);
+
+  function removeItemHandler(val) {
+    toggleDialog();
+    if (val) return removeItem(photo.id);
   }
   function editItemHandler(editPhoto) {
     editItem(editPhoto);
@@ -55,11 +63,47 @@ const AlbumItem = ({ photo, removeItem, editItem }) => {
                   color="error"
                   size="small"
                   disableRipple
-                  onClick={removeItemHandler}
+                  onClick={toggleDialog}
                 >
                   <Delete fontSize="small" />
                 </IconButton>
               </Tooltip>
+              <Dialog
+                fullWidth
+                open={openDialog}
+                onClose={toggleDialog}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogTitle color="error" id="alert-dialog-title">
+                  {"Delete Item"}
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText
+                    color="InfoText"
+                    id="alert-dialog-description"
+                  >
+                    Are you sure want to delete item?
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button
+                    onClick={() => removeItemHandler(false)}
+                    variant="contained"
+                    color="text"
+                  >
+                    Cancle
+                  </Button>
+                  <Button
+                    onClick={() => removeItemHandler(true)}
+                    autoFocus
+                    variant="contained"
+                    color="error"
+                  >
+                    Delete
+                  </Button>
+                </DialogActions>
+              </Dialog>
               <Tooltip title="Edit">
                 <IconButton
                   aria-label="more"
