@@ -19,18 +19,26 @@ export default function MainNavigation() {
     <Box sx={{ flexGrow: 1, marginBottom: 3 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
+          <LinkBase
+            component={Link}
+            underline="none"
             color="inherit"
-            aria-label="album"
-            disableRipple
+            to="/"
+            sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}
           >
-            <CameraIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ marginRight: 5 }}>
-            My-Album
-          </Typography>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="album"
+              disableRipple
+            >
+              <CameraIcon />
+            </IconButton>
+            <Typography variant="h6" component="div">
+              My-Album
+            </Typography>
+          </LinkBase>
           <Box
             sx={{
               flexGrow: 1,
