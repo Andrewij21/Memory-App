@@ -1,15 +1,12 @@
-import { Paper, Typography, Link as LinkBase } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Instagram, LinkedIn, Twitter, WhatsApp } from "@mui/icons-material";
+import { IconButton, Paper, Stack, Typography } from "@mui/material";
 
 function Copyright() {
   return (
     <Typography variant="body2" align="center">
-      {"Copyright © "}
-      <LinkBase component={Link} color="inherit" to="https://mui.com/">
-        Your Website
-      </LinkBase>{" "}
-      {new Date().getFullYear()}
-      {"."}
+      {"© "}
+      {new Date().getFullYear() + " "}
+      Andre Wijaya | All Rights Reserved
     </Typography>
   );
 }
@@ -27,16 +24,39 @@ export default function FooterNavigation() {
       square
     >
       <Typography variant="h6" component="h6" align="center" gutterBottom>
-        Footer
+        MY-ALBUM
       </Typography>
-      <Typography
+
+      <Stack
+        direction="row"
+        spacing={2}
+        justifyContent="center"
+        alignItems="center"
+        mb={1}
+      >
+        <IconButton size="medium" color="inherit">
+          <Instagram fontSize="medium" />
+        </IconButton>
+        <IconButton size="medium" color="inherit">
+          <Twitter fontSize="medium" />
+        </IconButton>
+        <IconButton size="medium" color="inherit">
+          <LinkedIn fontSize="medium" />
+        </IconButton>
+        <IconButton size="medium" color="inherit">
+          <WhatsApp fontSize="medium" />
+        </IconButton>
+      </Stack>
+
+      {/* <Typography
         variant="subtitle1"
         align="center"
         // color="text.secondary"
         component="p"
+        gutterBottom
       >
         Something here to give the footer a purpose!
-      </Typography>
+      </Typography> */}
       <Copyright />
     </Paper>
   );
