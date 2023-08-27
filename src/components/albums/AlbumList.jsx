@@ -9,7 +9,7 @@ const AlbumList = ({ photos, removeItem, editItem }) => {
         return (
           <MeetupItem
             photo={photo}
-            key={photo.id}
+            key={photo._id}
             removeItem={removeItem}
             editItem={editItem}
           />

@@ -26,9 +26,9 @@ const AlbumForm = ({ addItem, editItem, title, detail, closeModal }) => {
       date: date.toJSON(),
     };
     // console.log(photo);
-    if (detail?.id) {
+    if (detail?._id) {
       closeModal();
-      return editItem({ ...photo, id: detail.id });
+      return editItem({ ...photo, _id: detail._id });
     }
     addItem(photo);
   };

@@ -26,7 +26,7 @@ const AlbumItem = ({ photo, removeItem, editItem }) => {
 
   function removeItemHandler(val) {
     toggleDialog();
-    if (val) return removeItem(photo.id);
+    if (val) return removeItem(photo._id);
   }
   function editItemHandler(editPhoto) {
     editItem(editPhoto);
