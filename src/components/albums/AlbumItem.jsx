@@ -89,6 +89,7 @@ const AlbumItem = ({ photo, removeItem, editItem }) => {
                 sx={{
                   display: "flex",
                   justifyContent: "center",
+                  outline: 0,
                 }}
               >
                 <Box
