@@ -1,10 +1,12 @@
 import { Delete, MoreVert } from "@mui/icons-material";
 import {
   Box,
+  // Button,
   Card,
   CardContent,
   CardMedia,
   Dialog,
+  Divider,
   Grid,
   IconButton,
   Modal,
@@ -20,6 +22,7 @@ import AlertDialog from "../ui/AlertDialog";
 const AlbumItem = ({ photo, removeItem, editItem }) => {
   const [open, setOpen] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
+  // const [showMore, setShowMore] = useState(false);
 
   const toglleModal = () => setOpen(!open);
   const toggleDialog = () => setOpenDialog(!openDialog);
@@ -35,12 +38,18 @@ const AlbumItem = ({ photo, removeItem, editItem }) => {
   return (
     <Grid item xs={12} sm={6} md={4}>
       <Card
-        sx={{ height: "100%", display: "flex", flexDirection: "column" }}
+        sx={{
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          // justifyContent: "space-between",
+        }}
         raised
       >
         <CardMedia
           component="img"
-          // height={150}
+          height={200}
+          // height="100%"
           alt={photo.name}
           image={photo.image}
         />
@@ -48,10 +57,11 @@ const AlbumItem = ({ photo, removeItem, editItem }) => {
           <Box
             display="flex"
             justifyContent="space-between"
-            alignItems="center"
+            alignItems="start"
             sx={{
               flexGrow: 1,
-              my: 2,
+              mt: 2,
+              minHeight: "75px",
             }}
           >
             <Typography gutterBottom variant="h5" component="h2">
@@ -107,7 +117,7 @@ const AlbumItem = ({ photo, removeItem, editItem }) => {
               </Modal>
             </Box>
           </Box>
-
+          <Divider sx={{ borderBottomWidth: 2, mb: 2 }} />
           <Box>
             <Typography variant="caption" color="text.secondary" component="p">
               {dayjs(photo.date).format("DD/MM/YYYY")}
@@ -115,8 +125,20 @@ const AlbumItem = ({ photo, removeItem, editItem }) => {
             <Typography variant="body2" component="p">
               {photo.description}
             </Typography>
+            {/* <Typography variant="body2" component="p">
+              {showMore
+                ? photo.description
+                : photo.description.substring(0, 200)}
+            </Typography> */}
           </Box>
         </CardContent>
+        {/* <Box
+          sx={{
+            textAlign: "right",
+          }}
+        >
+          <Button size="small">Detail</Button>
+        </Box> */}
       </Card>
     </Grid>
   );
