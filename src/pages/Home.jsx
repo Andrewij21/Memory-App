@@ -7,28 +7,25 @@ const Home = () => {
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
-    fetch("https://react-album-1a909-default-rtdb.firebaseio.com/albums.json")
+    fetch("http://localhost:3000/album")
       .then((res) => {
         return res.json();
       })
       .then((data) => {
         let loadedAlbums = [];
-        for (const key in data) {
-          loadedAlbums.push({ id: key, ...data[key] });
+        for (const key in data.data) {
+          loadedAlbums.push({ id: key, ...data.data[key] });
         }
-        // console.log(data);
+        console.log(data);
         // console.log(loadedAlbums);
-        setAlbums(loadedAlbums);
+        setAlbums(data.data);
       });
   }, [refresh]);
 
   function removeItemHandler(id) {
-    fetch(
-      `https://react-album-1a909-default-rtdb.firebaseio.com/albums/${id}.json`,
-      {
-        method: "DELETE",
-      }
-    ).then(() => {
+    fetch(`http://localhost:3000/album/${id}`, {
+      method: "DELETE",
+    }).then(() => {
       console.log("Data dihapus");
       setRefresh(!refresh);
       // setAlbums((prevPhoto) => {
@@ -37,16 +34,13 @@ const Home = () => {
     });
   }
   function editItemHandler(editPhoto) {
-    fetch(
-      `https://react-album-1a909-default-rtdb.firebaseio.com/albums/${editPhoto.id}.json`,
-      {
-        method: "PATCH",
-        body: JSON.stringify(editPhoto),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    ).then(() => {
+    fetch(`http://localhost:3000/album/${editPhoto._id}`, {
+      method: "PATCH",
+      body: JSON.stringify(editPhoto),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(() => {
       setRefresh(!refresh);
       console.log("Data diedit");
     });
