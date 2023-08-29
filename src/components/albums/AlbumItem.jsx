@@ -1,7 +1,7 @@
 import { Delete, MoreVert } from "@mui/icons-material";
 import {
   Box,
-  // Button,
+  Button,
   Card,
   CardContent,
   CardMedia,
@@ -18,14 +18,19 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import AlbumForm from "./AlbumForm";
 import AlertDialog from "../ui/AlertDialog";
+import Details from "./Details";
 
 const AlbumItem = ({ photo, removeItem, editItem }) => {
-  const [open, setOpen] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [openDetails, setOpenDetails] = useState(false);
+  const [fullImage, setFullImage] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   // const [showMore, setShowMore] = useState(false);
 
-  const toglleModal = () => setOpen(!open);
+  const toglleModal = () => setOpenEdit(!openEdit);
   const toggleDialog = () => setOpenDialog(!openDialog);
+  const toggleFullImage = () => setFullImage(!fullImage);
+  const toggleDetailsImage = () => setOpenDetails(!openDetails);
 
   function removeItemHandler(val) {
     toggleDialog();
@@ -39,20 +44,37 @@ const AlbumItem = ({ photo, removeItem, editItem }) => {
     <Grid item xs={12} sm={6} md={4}>
       <Card
         sx={{
-          height: "100%",
           display: "flex",
           flexDirection: "column",
-          // justifyContent: "space-between",
+          justifyContent: "space-between",
+          height: "100%",
         }}
         raised
       >
         <CardMedia
+          sx={{
+            // 16:9
+            // pt: "56.25%",
+            cursor: "pointer",
+            aspectRatio: 16 / 9,
+          }}
+          onClick={toggleFullImage}
           component="img"
-          height={200}
-          // height="100%"
           alt={photo.name}
           image={photo.image}
         />
+        <Modal
+          open={fullImage}
+          onClose={toggleFullImage}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Box component="div" sx={{ outline: 0, alignSelf: "center" }}>
+            <Details image={photo} />
+          </Box>
+        </Modal>
         <CardContent>
           <Box
             display="flex"
@@ -65,7 +87,7 @@ const AlbumItem = ({ photo, removeItem, editItem }) => {
             }}
           >
             <Typography gutterBottom variant="h5" component="h2">
-              {photo.name}
+              {photo.name.substring(0, 50)}
             </Typography>
 
             <Box sx={{ display: "flex" }}>
@@ -94,7 +116,7 @@ const AlbumItem = ({ photo, removeItem, editItem }) => {
                 </IconButton>
               </Tooltip>
               <Modal
-                open={open}
+                open={openEdit}
                 onClose={toglleModal}
                 sx={{
                   display: "flex",
@@ -122,23 +144,36 @@ const AlbumItem = ({ photo, removeItem, editItem }) => {
             <Typography variant="caption" color="text.secondary" component="p">
               {dayjs(photo.date).format("DD/MM/YYYY")}
             </Typography>
-            <Typography variant="body2" component="p">
-              {photo.description}
+            <Typography
+              variant="body2"
+              component="p"
+              sx={{ overflowWrap: "break-word" }}
+            >
+              {photo.description.substring(0, 180)}
             </Typography>
-            {/* <Typography variant="body2" component="p">
-              {showMore
-                ? photo.description
-                : photo.description.substring(0, 200)}
-            </Typography> */}
           </Box>
         </CardContent>
-        {/* <Box
+        <Box
           sx={{
             textAlign: "right",
           }}
         >
-          <Button size="small">Detail</Button>
-        </Box> */}
+          <Button size="small" onClick={toggleDetailsImage}>
+            Detail
+          </Button>
+          <Modal
+            open={openDetails}
+            onClose={toggleDetailsImage}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Box component="div" sx={{ outline: 0, alignSelf: "center" }}>
+              <Details details={photo} />
+            </Box>
+          </Modal>
+        </Box>
       </Card>
     </Grid>
   );
