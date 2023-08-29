@@ -15,7 +15,7 @@ const AlbumForm = ({ addItem, editItem, title, detail, closeModal }) => {
   const name = useRef();
   const image = useRef();
   const description = useRef();
-  const [date, setDate] = useState(dayjs);
+  const [date, setDate] = useState(dayjs(detail?.date));
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,7 +25,6 @@ const AlbumForm = ({ addItem, editItem, title, detail, closeModal }) => {
       description: description.current.value,
       date: date.toJSON(),
     };
-    // console.log(photo);
     if (detail?._id) {
       closeModal();
       return editItem({ ...photo, _id: detail._id });
