@@ -1,4 +1,4 @@
-import { Card, CardMedia, Paper } from "@mui/material";
+import { CardMedia, Paper } from "@mui/material";
 
 const FullImage = (image) => {
   return (
