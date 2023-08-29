@@ -5,7 +5,7 @@ export default function NewPhoto() {
   const navigate = useNavigate();
   const addPhotoHandler = (photo) => {
     console.log(photo);
-    fetch("https://react-album-1a909-default-rtdb.firebaseio.com/albums.json", {
+    fetch("http://localhost:3000/album", {
       method: "POST",
       body: JSON.stringify(photo),
       headers: {
