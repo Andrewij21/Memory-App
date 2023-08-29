@@ -1,6 +1,7 @@
 import { CardMedia, Paper } from "@mui/material";
+import PropTypes from "prop-types";
 
-const FullImage = (image) => {
+const FullImage = ({ image }) => {
   return (
     <Paper
       sx={{
@@ -25,5 +26,7 @@ const FullImage = (image) => {
     </Paper>
   );
 };
-
+FullImage.propTypes = {
+  image: PropTypes.object,
+};
 export default FullImage;
