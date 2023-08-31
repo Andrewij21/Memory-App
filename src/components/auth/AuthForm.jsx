@@ -13,22 +13,17 @@ import Checkbox from "@mui/material/Checkbox";
 import { useRef } from "react";
 import PropTypes from "prop-types";
 
-export default function AuthForm({ type }) {
-  const username = useRef();
+export default function AuthForm({ type, handler, title }) {
+  const email = useRef();
   const password = useRef();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const user = {
-      username: username.current.value,
+      email: email.current.value,
       password: password.current.value,
     };
-    if (
-      !user.password.replace(/\s+/g, "") ||
-      !user.username.replace(/\s+/g, "")
-    ) {
-      return alert("Field can't empty!!!");
-    }
+    if (type === "login") return handler(user);
   };
 
   return (
@@ -57,7 +52,7 @@ export default function AuthForm({ type }) {
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12}>
             <TextField
-              inputRef={username}
+              inputRef={email}
               name="email"
               required
               fullWidth
@@ -113,9 +108,9 @@ export default function AuthForm({ type }) {
           type="submit"
           fullWidth
           variant="contained"
-          sx={{ mt: 3, mb: 2 }}
+          sx={{ mt: 3, mb: 2, textTransform: "uppercase" }}
         >
-          Sign Up
+          {title}
         </Button>
         <Grid container>
           {type !== "register" ? (
@@ -164,4 +159,6 @@ export default function AuthForm({ type }) {
 
 AuthForm.propTypes = {
   type: PropTypes.string,
+  title: PropTypes.string,
+  handler: PropTypes.func,
 };
