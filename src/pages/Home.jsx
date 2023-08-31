@@ -19,6 +19,10 @@ const Home = () => {
         console.log(data);
         // console.log(loadedAlbums);
         setAlbums(data.data);
+      })
+      .catch((err) => {
+        console.log({ err });
+        setAlbums([]);
       });
   }, [refresh]);
 
