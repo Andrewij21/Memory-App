@@ -6,6 +6,7 @@ import Registration from "./pages/auth/Registration";
 import Login from "./pages/auth/Login";
 import RequireAuth from "./pages/auth/RequireAuth";
 import Unauthorized from "./pages/auth/Unauthorized";
+import Admin from "./pages/Admin";
 
 const ROLES = {
   User: 2000,
@@ -23,6 +24,9 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="new-photo" element={<NewPhoto />} />
+            <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+              <Route path="admin" element={<Admin />} />
+            </Route>
           </Route>
         </Route>
       </Routes>
