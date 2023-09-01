@@ -5,11 +5,31 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import CameraIcon from "@mui/icons-material/CameraAlt";
-import { AccountCircle } from "@mui/icons-material";
-import { Link as LinkBase } from "@mui/material";
-import { Link } from "react-router-dom";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import { AccountCircle, Logout } from "@mui/icons-material";
+import { Link as LinkBase, ListItemIcon, Tooltip } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import useLogout from "../../hooks/useLogout";
 
 export default function MainNavigation() {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const logout = useLogout();
+  const navigate = useNavigate();
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login");
+  };
+
   const pages = [
     { name: "Album", path: "/" },
     { name: "New Photo", path: "/new-photo" },
@@ -65,13 +85,24 @@ export default function MainNavigation() {
               </Button>
             ))}
           </Box>
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            color="inherit"
-          >
-            <AccountCircle />
-          </IconButton>
+          <Tooltip title="Account setting">
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              color="inherit"
+              onClick={handleClick}
+            >
+              <AccountCircle />
+            </IconButton>
+          </Tooltip>
+          <Menu open={open} onClose={handleClose} anchorEl={anchorEl}>
+            <MenuItem onClick={handleLogout}>
+              <ListItemIcon>
+                <Logout fontSize="small" />
+              </ListItemIcon>
+              Logout
+            </MenuItem>
+          </Menu>
         </Toolbar>
       </AppBar>
     </Box>
