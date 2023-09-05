@@ -10,12 +10,14 @@ import { Link } from "react-router-dom";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
+import useAuth from "../../hooks/useAuth";
 
 export default function AuthForm({ type, handler, title }) {
   const email = useRef();
   const password = useRef();
+  const { setPresist, presist } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -26,6 +28,9 @@ export default function AuthForm({ type, handler, title }) {
     if (type === "login") return handler(user);
   };
 
+  useEffect(() => {
+    localStorage.setItem("presist", presist);
+  }, [presist]);
   return (
     <Box
       sx={{
@@ -93,9 +98,8 @@ export default function AuthForm({ type, handler, title }) {
                 <FormControlLabel
                   control={
                     <Checkbox
-                      // checked={presist}
-                      checked={false}
-                      // onChange={() => setPresist((prev) => !prev)}
+                      checked={presist}
+                      onChange={() => setPresist((prev) => !prev)}
                     />
                   }
                   label="Trust this device"
