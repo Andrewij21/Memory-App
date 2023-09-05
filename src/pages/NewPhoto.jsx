@@ -1,19 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import AlbumForm from "../components/albums/AlbumForm";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 export default function NewPhoto() {
   const navigate = useNavigate();
-  const addPhotoHandler = (photo) => {
+  const axiosPrivate = useAxiosPrivate();
+
+  const addPhotoHandler = async (photo) => {
     console.log(photo);
-    fetch("http://localhost:3000/album", {
-      method: "POST",
-      body: JSON.stringify(photo),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then(() => {
+    try {
+      await axiosPrivate.post(`/album`, photo);
+      console.log("data di tambah");
       navigate("/");
-    });
+    } catch (error) {
+      console.log({ error });
+    }
   };
 
   return <AlbumForm addItem={addPhotoHandler} title={"Add Photo"} />;

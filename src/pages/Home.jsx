@@ -1,53 +1,49 @@
 import { Typography } from "@mui/material";
 import AlbumList from "../components/albums/AlbumList";
 import { useEffect, useState } from "react";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const Home = () => {
   const [albums, setAlbums] = useState([]);
   const [refresh, setRefresh] = useState(false);
+  const axiosPrivate = useAxiosPrivate();
 
   useEffect(() => {
-    fetch("http://localhost:3000/album")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        let loadedAlbums = [];
-        for (const key in data.data) {
-          loadedAlbums.push({ id: key, ...data.data[key] });
-        }
-        console.log(data);
-        // console.log(loadedAlbums);
-        setAlbums(data.data);
-      })
-      .catch((err) => {
-        console.log({ err });
-        setAlbums([]);
-      });
-  }, [refresh]);
+    let isMounted = true;
 
-  function removeItemHandler(id) {
-    fetch(`http://localhost:3000/album/${id}`, {
-      method: "DELETE",
-    }).then(() => {
-      console.log("Data dihapus");
+    const getPhoto = async () => {
+      try {
+        const { data } = await axiosPrivate.get("/album");
+
+        isMounted && setAlbums(data.data);
+      } catch (error) {
+        console.error(error);
+        setAlbums([]);
+      }
+    };
+    getPhoto();
+    return () => {
+      isMounted = false;
+    };
+  }, [axiosPrivate, refresh]);
+
+  async function removeItemHandler(id) {
+    try {
+      await axiosPrivate.delete(`/album/${id}`);
       setRefresh(!refresh);
-      // setAlbums((prevPhoto) => {
-      //   return prevPhoto.filter((photo) => photo.id !== id);
-      // });
-    });
+      console.log("data di hapus");
+    } catch (error) {
+      console.log({ error });
+    }
   }
-  function editItemHandler(editPhoto) {
-    fetch(`http://localhost:3000/album/${editPhoto._id}`, {
-      method: "PATCH",
-      body: JSON.stringify(editPhoto),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then(() => {
+  async function editItemHandler(editPhoto) {
+    try {
+      await axiosPrivate.patch(`/album/${editPhoto._id}`, editPhoto);
       setRefresh(!refresh);
-      console.log("Data diedit");
-    });
+      console.log("data di edit");
+    } catch (error) {
+      console.log({ error });
+    }
   }
   return (
     <>
