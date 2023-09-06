@@ -1,7 +1,7 @@
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { Link as LinkBase } from "@mui/material";
+import { Alert, Link as LinkBase } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -10,22 +10,57 @@ import { Link } from "react-router-dom";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import useAuth from "../../hooks/useAuth";
 
 export default function AuthForm({ type, handler, title }) {
+  const [errorEmail, setErrorEmail] = useState(false);
+  const [errorPassword, setErrorPassword] = useState(false);
+  const [errorMessage, seterrorMessage] = useState(null);
+
   const email = useRef();
   const password = useRef();
+  const confirmPassword = useRef();
   const { setPresist, presist } = useAuth();
 
+  const checkPassword = (password, confirmPassword) => {
+    return password.replace(/\s/g, "") !== confirmPassword.replace(/\s/g, "")
+      ? false
+      : true;
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setErrorEmail(false);
+    setErrorPassword(false);
+    seterrorMessage(null);
     const user = {
       email: email.current.value,
       password: password.current.value,
+      confirmPassword: confirmPassword.current?.value,
     };
-    if (type === "login") return handler(user);
+    if (type !== "login") {
+      const status = checkPassword(user.password, user.confirmPassword);
+      if (!status) {
+        setErrorPassword(true);
+        return seterrorMessage("Password is not match");
+      }
+    }
+
+    delete user.confirmPassword;
+    const status = await handler(user);
+    // const status = error.response.status;
+    // console.log({ error });
+    if (status === 409) {
+      setErrorEmail(true);
+      seterrorMessage("Email already exist");
+    } else if (status === 404 || status === 401) {
+      setErrorEmail(true);
+      setErrorPassword(true);
+      seterrorMessage("Username or password is incorrect");
+    } else {
+      seterrorMessage("Success");
+    }
   };
 
   useEffect(() => {
@@ -57,6 +92,7 @@ export default function AuthForm({ type, handler, title }) {
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12}>
             <TextField
+              error={errorEmail}
               inputRef={email}
               name="email"
               required
@@ -68,7 +104,7 @@ export default function AuthForm({ type, handler, title }) {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              // error={errorPassword}
+              error={errorPassword}
               inputRef={password}
               required
               fullWidth
@@ -79,8 +115,8 @@ export default function AuthForm({ type, handler, title }) {
           {type === "register" && (
             <Grid item xs={12}>
               <TextField
-                // error={errorPassword}
-                // inputRef={confirmPassword}
+                error={errorPassword}
+                inputRef={confirmPassword}
                 required
                 fullWidth
                 name="confirm-password"
@@ -88,7 +124,6 @@ export default function AuthForm({ type, handler, title }) {
                 type="password"
                 id="confirmPassword"
                 autoComplete="confirm-password"
-                // helperText={errorPassword && "Password not match"}
               />
             </Grid>
           )}
@@ -155,6 +190,13 @@ export default function AuthForm({ type, handler, title }) {
               </LinkBase>
             </Grid>
           )}
+          <Grid item xs={12} mt={2}>
+            {errorMessage && (
+              <Alert severity="error" variant="outlined">
+                {errorMessage}
+              </Alert>
+            )}
+          </Grid>
         </Grid>
       </Box>
     </Box>
