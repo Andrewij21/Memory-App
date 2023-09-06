@@ -27,7 +27,7 @@ const Login = () => {
       navigate("/");
     } catch (error) {
       console.log({ error: error.toString() });
-      alert(error.response.data.message);
+      return error.response.status;
     }
   };
   return <AuthForm type="login" handler={handleLogin} title="sign in" />;
