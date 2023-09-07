@@ -23,7 +23,8 @@ const Login = () => {
       console.log({ response });
       const roles = response.data.data.roles;
       const accessToken = response.data.data.accessToken;
-      setAuth({ email, password, roles, accessToken });
+      const user = response.data.data.user;
+      setAuth({ email, roles, accessToken, user });
       navigate("/");
     } catch (error) {
       console.log({ error: error.toString() });
