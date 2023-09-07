@@ -10,13 +10,14 @@ import { useRef, useState } from "react";
 import { Paper } from "@mui/material";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
+import useAuth from "../../hooks/useAuth";
 
 const AlbumForm = ({ addItem, editItem, title, detail, closeModal }) => {
+  const { auth } = useAuth();
   const name = useRef();
   const image = useRef();
   const description = useRef();
   const [date, setDate] = useState(dayjs(detail?.date));
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const photo = {
@@ -24,6 +25,7 @@ const AlbumForm = ({ addItem, editItem, title, detail, closeModal }) => {
       image: image.current.value,
       description: description.current.value,
       date: date.toJSON(),
+      user: auth.user,
     };
     if (detail?._id) {
       closeModal();
