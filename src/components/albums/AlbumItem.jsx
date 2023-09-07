@@ -144,12 +144,24 @@ const AlbumItem = ({ photo, removeItem, editItem }) => {
             <Typography variant="caption" color="text.secondary" component="p">
               {dayjs(photo.date).format("DD/MM/YYYY")}
             </Typography>
-            <Typography
+            {/* <Typography
               variant="body2"
               component="p"
               sx={{ overflowWrap: "break-word" }}
             >
               {photo.description.substring(0, 180)}
+            </Typography> */}
+            <Typography
+              variant="body2"
+              component="p"
+              sx={{
+                display: "-webkit-box",
+                overflow: "hidden",
+                WebkitBoxOrient: "vertical",
+                WebkitLineClamp: 4,
+              }}
+            >
+              {photo.description}
             </Typography>
           </Box>
         </CardContent>
