@@ -2,18 +2,20 @@ import { Typography } from "@mui/material";
 import AlbumList from "../components/albums/AlbumList";
 import { useEffect, useState } from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import useAuth from "../hooks/useAuth";
 
 const Home = () => {
   const [albums, setAlbums] = useState([]);
   const [refresh, setRefresh] = useState(false);
   const axiosPrivate = useAxiosPrivate();
+  const { auth } = useAuth();
 
   useEffect(() => {
     let isMounted = true;
 
     const getPhoto = async () => {
       try {
-        const { data } = await axiosPrivate.get("/album");
+        const { data } = await axiosPrivate.get(`/album/user/${auth.user}`);
 
         isMounted && setAlbums(data.data);
       } catch (error) {
@@ -25,7 +27,7 @@ const Home = () => {
     return () => {
       isMounted = false;
     };
-  }, [axiosPrivate, refresh]);
+  }, [axiosPrivate, refresh, auth]);
 
   async function removeItemHandler(id) {
     try {
