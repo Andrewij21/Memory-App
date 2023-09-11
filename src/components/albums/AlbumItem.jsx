@@ -46,7 +46,7 @@ const AlbumItem = ({ photo, removeItem, editItem }) => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
+          // justifyContent: "space-between",
           height: "100%",
         }}
         raised
@@ -81,13 +81,23 @@ const AlbumItem = ({ photo, removeItem, editItem }) => {
             justifyContent="space-between"
             alignItems="start"
             sx={{
-              flexGrow: 1,
               mt: 2,
-              minHeight: "75px",
             }}
           >
-            <Typography gutterBottom variant="h5" component="h2">
-              {photo.name.substring(0, 50)}
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="h2"
+              sx={{
+                flexGrow: 1,
+                display: "-webkit-box",
+                overflow: "hidden",
+                WebkitBoxOrient: "vertical",
+                WebkitLineClamp: 2,
+                // minHeight: 65,
+              }}
+            >
+              {photo.name}
             </Typography>
 
             <Box sx={{ display: "flex" }}>
@@ -167,7 +177,8 @@ const AlbumItem = ({ photo, removeItem, editItem }) => {
         </CardContent>
         <Box
           sx={{
-            textAlign: "right",
+            alignSelf: "self-end",
+            mt: "auto",
           }}
         >
           <Button size="small" onClick={toggleDetailsImage}>
