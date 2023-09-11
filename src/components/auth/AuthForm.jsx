@@ -79,7 +79,7 @@ export default function AuthForm({ type, handler, title }) {
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
-        Sign in
+        {title}
       </Typography>
       <Box
         component="form"
