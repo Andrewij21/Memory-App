@@ -52,11 +52,17 @@ const Home = () => {
       <Typography component="h1" variant="h4" fontWeight="bold" gutterBottom>
         Albums
       </Typography>
-      <AlbumList
-        photos={albums}
-        removeItem={removeItemHandler}
-        editItem={editItemHandler}
-      />
+      {albums.length === 0 ? (
+        <Typography component="h2" variant="subtitle1" gutterBottom>
+          Your Album is empty
+        </Typography>
+      ) : (
+        <AlbumList
+          photos={albums}
+          removeItem={removeItemHandler}
+          editItem={editItemHandler}
+        />
+      )}
     </>
   );
 };
