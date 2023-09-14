@@ -61,7 +61,7 @@ const AlbumItem = ({ photo, removeItem, editItem }) => {
           onClick={toggleFullImage}
           component="img"
           alt={photo.name}
-          image={photo.image}
+          image={"http://localhost:3000/images/" + photo.image}
         />
         <Modal
           open={fullImage}
@@ -80,9 +80,11 @@ const AlbumItem = ({ photo, removeItem, editItem }) => {
             display="flex"
             justifyContent="space-between"
             alignItems="start"
-            sx={{
-              mt: 2,
-            }}
+            sx={
+              {
+                // mt: 2,
+              }
+            }
           >
             <Typography
               gutterBottom

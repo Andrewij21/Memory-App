@@ -21,7 +21,7 @@ const FullImage = ({ image }) => {
         }}
         alt={image.name}
         // image={image.image}
-        image={image.image}
+        image={"http://localhost:3000/images/" + image.image}
       />
     </Paper>
   );
