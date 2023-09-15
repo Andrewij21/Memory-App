@@ -7,9 +7,17 @@ export default function NewPhoto() {
   const axiosPrivate = useAxiosPrivate();
 
   const addPhotoHandler = async (photo) => {
-    console.log(photo);
     try {
-      await axiosPrivate.post(`/album`, photo);
+      const formData = new FormData();
+      formData.append("name", photo.name);
+      formData.append("image", photo.image);
+      formData.append("description", photo.description);
+      formData.append("date", photo.date);
+      formData.append("user", photo.user);
+
+      await axiosPrivate.post(`/album`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       console.log("data di tambah");
       navigate("/");
     } catch (error) {
