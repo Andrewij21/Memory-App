@@ -32,7 +32,7 @@ const AlbumForm = ({ addItem, editItem, title, detail, closeModal }) => {
     console.log({ photo });
     if (detail?._id) {
       closeModal();
-      return editItem({ ...photo, _id: detail._id });
+      return editItem({ editPhoto: photo, id: detail?._id });
     }
     addItem(photo);
   };
