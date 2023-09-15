@@ -11,22 +11,25 @@ import { Paper } from "@mui/material";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 import useAuth from "../../hooks/useAuth";
+import { CloudUpload } from "@mui/icons-material";
 
 const AlbumForm = ({ addItem, editItem, title, detail, closeModal }) => {
   const { auth } = useAuth();
   const name = useRef();
-  const image = useRef();
+  const [image, setImage] = useState();
   const description = useRef();
   const [date, setDate] = useState(dayjs(detail?.date));
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const photo = {
       name: name.current.value,
-      image: image.current.value,
+      image: image,
       description: description.current.value,
       date: date.toJSON(),
       user: auth.user,
     };
+    console.log({ photo });
     if (detail?._id) {
       closeModal();
       return editItem({ ...photo, _id: detail._id });
@@ -67,7 +70,7 @@ const AlbumForm = ({ addItem, editItem, title, detail, closeModal }) => {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              {/* <TextField
                 required
                 fullWidth
                 defaultValue={detail?.image}
@@ -76,7 +79,27 @@ const AlbumForm = ({ addItem, editItem, title, detail, closeModal }) => {
                 label="image"
                 name="image"
                 placeholder="insert image url"
-              />
+              /> */}
+              <Button
+                variant="outlined"
+                component="label"
+                size="medium"
+                startIcon={<CloudUpload />}
+              >
+                Upload File
+                <input
+                  type="file"
+                  hidden
+                  onChange={(e) => setImage(e.target.files[0])}
+                />
+              </Button>
+              <Typography
+                sx={{ display: "inline-block", ml: 2 }}
+                variant="subtitle1"
+                component="p"
+              >
+                {image?.name || detail?.image || "(.png, .jpg, .jpeg)"}
+              </Typography>
             </Grid>
             <Grid item xs={12}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
