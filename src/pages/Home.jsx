@@ -38,9 +38,11 @@ const Home = () => {
       console.log({ error });
     }
   }
-  async function editItemHandler(editPhoto) {
+  async function editItemHandler({ editPhoto, id }) {
     try {
-      await axiosPrivate.patch(`/album/${editPhoto._id}`, editPhoto);
+      await axiosPrivate.patch(`/album/${id}`, editPhoto, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       setRefresh(!refresh);
       console.log("data di edit");
     } catch (error) {
