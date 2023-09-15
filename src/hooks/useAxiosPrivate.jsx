@@ -24,8 +24,12 @@ const useAxiosPrivate = () => {
         if (err.response.status === 403 && !prevRequest.sent) {
           prevRequest.sent = true;
           const newAccessToken = await refresh();
-
-          prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
+          // prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
+          prevRequest.headers = {
+            ...prevRequest.headers,
+            Authorization: `Bearer ${newAccessToken}`,
+            // "Content-Type": "multipart/form-data",
+          };
           return axiosPrivate(prevRequest);
         }
         return Promise.reject(err);
