@@ -7,17 +7,29 @@ import useAuth from "../hooks/useAuth";
 const Home = () => {
   const [albums, setAlbums] = useState([]);
   const [refresh, setRefresh] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const axiosPrivate = useAxiosPrivate();
+  const [page, setPage] = useState(1);
+  const [count, setCount] = useState(0);
   const { auth } = useAuth();
+  let content;
+  let contentExist;
 
   useEffect(() => {
     let isMounted = true;
-
+    setIsLoading(true);
     const getPhoto = async () => {
       try {
-        const { data } = await axiosPrivate.get(`/album/user/${auth.user}`);
+        const { data } = await axiosPrivate.get(
+          `/album/user/?user=${auth.user}&page=${page}`
+        );
 
-        isMounted && setAlbums(data.data);
+        if (isMounted) {
+          console.log({ data });
+          setCount(data.pagination.totalPages);
+          setAlbums(data.data);
+          setIsLoading(false);
+        }
       } catch (error) {
         console.error(error);
         setAlbums([]);
@@ -27,8 +39,12 @@ const Home = () => {
     return () => {
       isMounted = false;
     };
-  }, [axiosPrivate, refresh, auth]);
+  }, [axiosPrivate, refresh, auth, page]);
 
+  function pageHandler(event, page) {
+    console.log({ page });
+    setPage(page);
+  }
   async function removeItemHandler(id) {
     try {
       await axiosPrivate.delete(`/album/${id}`);
@@ -49,22 +65,30 @@ const Home = () => {
       console.log({ error });
     }
   }
+
+  contentExist =
+    albums.length === 0 ? (
+      <Typography component="h2" variant="subtitle1" gutterBottom>
+        Your Album is empty
+      </Typography>
+    ) : (
+      <AlbumList
+        photos={albums}
+        removeItem={removeItemHandler}
+        editItem={editItemHandler}
+        pageHandler={pageHandler}
+        count={count}
+        page={page}
+      />
+    );
+  content = isLoading ? <p>Loading....</p> : contentExist;
+
   return (
     <>
       <Typography component="h1" variant="h4" fontWeight="bold" gutterBottom>
         Albums
       </Typography>
-      {albums.length === 0 ? (
-        <Typography component="h2" variant="subtitle1" gutterBottom>
-          Your Album is empty
-        </Typography>
-      ) : (
-        <AlbumList
-          photos={albums}
-          removeItem={removeItemHandler}
-          editItem={editItemHandler}
-        />
-      )}
+      {content}
     </>
   );
 };
