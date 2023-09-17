@@ -1,8 +1,15 @@
-import { Grid } from "@mui/material";
+import { Grid, Pagination } from "@mui/material";
 import MeetupItem from "./AlbumItem";
 import PropTypes from "prop-types";
 
-const AlbumList = ({ photos, removeItem, editItem }) => {
+const AlbumList = ({
+  photos,
+  removeItem,
+  editItem,
+  pageHandler,
+  count,
+  page,
+}) => {
   return (
     <Grid container spacing={5}>
       {photos.map((photo) => {
@@ -15,6 +22,16 @@ const AlbumList = ({ photos, removeItem, editItem }) => {
           />
         );
       })}
+      <Grid
+        item
+        xs={12}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Pagination count={count} page={page} onChange={pageHandler} />
+      </Grid>
     </Grid>
   );
 };
@@ -23,5 +40,8 @@ AlbumList.propTypes = {
   photos: PropTypes.array,
   removeItem: PropTypes.func,
   editItem: PropTypes.func,
+  pageHandler: PropTypes.func,
+  count: PropTypes.number,
+  page: PropTypes.number,
 };
 export default AlbumList;
