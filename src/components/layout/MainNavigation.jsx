@@ -8,7 +8,7 @@ import CameraIcon from "@mui/icons-material/CameraAlt";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { AccountCircle, Logout } from "@mui/icons-material";
-import { Link as LinkBase, ListItemIcon, Tooltip } from "@mui/material";
+import { Avatar, Link as LinkBase, ListItemIcon, Tooltip } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useLogout from "../../hooks/useLogout";
@@ -27,6 +27,10 @@ export default function MainNavigation() {
 
   const handleLogout = async () => {
     await logout();
+    navigate("/login");
+  };
+  const handleProfile = async () => {
+    // await logout();
     navigate("/login");
   };
 
@@ -86,16 +90,31 @@ export default function MainNavigation() {
             ))}
           </Box>
           <Tooltip title="Account setting">
-            <IconButton
+            {/* <IconButton
               size="large"
               aria-label="account of current user"
               color="inherit"
               onClick={handleClick}
             >
               <AccountCircle />
+            </IconButton> */}
+            <IconButton
+              // size="small"
+              aria-label="account of current user"
+              color="inherit"
+              onClick={handleClick}
+            >
+              <Avatar>A</Avatar>
+              {/* <AccountCircle /> */}
             </IconButton>
           </Tooltip>
           <Menu open={open} onClose={handleClose} anchorEl={anchorEl}>
+            <MenuItem onClick={handleProfile}>
+              <ListItemIcon>
+                <AccountCircle fontSize="small" />
+              </ListItemIcon>
+              Profile
+            </MenuItem>
             <MenuItem onClick={handleLogout}>
               <ListItemIcon>
                 <Logout fontSize="small" />
