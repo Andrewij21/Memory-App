@@ -8,6 +8,7 @@ import RequireAuth from "./pages/auth/RequireAuth";
 import Unauthorized from "./pages/auth/Unauthorized";
 import Admin from "./pages/Admin";
 import PresistLogin from "./pages/auth/PresistLogin";
+import Profile from "./pages/Profile";
 
 const ROLES = {
   User: 2000,
@@ -27,6 +28,7 @@ function App() {
             <Route path="/" element={<Layout />}>
               <Route path="/" element={<Home />} />
               <Route path="new-photo" element={<NewPhoto />} />
+              <Route path="profile" element={<Profile />} />
               <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
                 <Route path="admin" element={<Admin />} />
               </Route>

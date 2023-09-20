@@ -31,7 +31,7 @@ export default function MainNavigation() {
   };
   const handleProfile = async () => {
     // await logout();
-    navigate("/login");
+    navigate("/profile");
   };
 
   const pages = [
