@@ -8,12 +8,15 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ForgetPassword = () => {
   const email = useRef();
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    navigate("/");
   };
 
   return (
