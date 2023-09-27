@@ -156,7 +156,7 @@ export default function AuthForm({ type, handler, title }) {
             <>
               <Grid item xs>
                 <LinkBase
-                  to="#"
+                  to="/forgetpassword"
                   component={Link}
                   variant="body2"
                   underline="none"

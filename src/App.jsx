@@ -9,6 +9,7 @@ import Unauthorized from "./pages/auth/Unauthorized";
 import Admin from "./pages/Admin";
 import PresistLogin from "./pages/auth/PresistLogin";
 import Profile from "./pages/Profile";
+import ForgetPassword from "./pages/ForgetPassword";
 
 const ROLES = {
   User: 2000,
@@ -22,6 +23,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="registration" element={<Registration />} />
         <Route path="unauthorized" element={<Unauthorized />} />
+        <Route path="forgetpassword" element={<ForgetPassword />} />
 
         <Route element={<PresistLogin />}>
           <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
