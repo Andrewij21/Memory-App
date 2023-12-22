@@ -17,7 +17,6 @@ When using **.env** file makes sure you have `VITE_` for example ```VITE_SOMETHI
 - [MaterialUI](https://mui.com) interactive building blocks for creating a user interface. 
 - [Vite](https://vitejs.dev) Frontend build tool for improves the frontend development
 - [React](https://react.dev) Frontend framework
-- [Multer](https://www.npmjs.com/package/multer) Middleware for handling `multipart/form-data`
 
 ## Contributing
 
