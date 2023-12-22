@@ -21,7 +21,7 @@ const Home = () => {
     const getPhoto = async () => {
       try {
         const { data } = await axiosPrivate.get(
-          `/album/user/?user=${auth.user}&page=${page}`
+          `/album/user?user=${auth.user}&page=${page}`
         );
 
         if (isMounted) {
