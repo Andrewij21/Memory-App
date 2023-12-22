@@ -154,7 +154,7 @@ export default function AuthForm({ type, handler, title }) {
         <Grid container>
           {type !== "register" ? (
             <>
-              <Grid item xs>
+              {/* <Grid item xs>
                 <LinkBase
                   to="/forgetpassword"
                   component={Link}
@@ -163,7 +163,7 @@ export default function AuthForm({ type, handler, title }) {
                 >
                   Forgot password?
                 </LinkBase>
-              </Grid>
+              </Grid> */}
               <Grid item>
                 <LinkBase
                   to="/registration"
