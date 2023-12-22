@@ -11,7 +11,6 @@ export default function NewPhoto() {
       await axiosPrivate.post(`/album`, photo, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      console.log("data di tambah");
       navigate("/");
     } catch (error) {
       console.log({ error });

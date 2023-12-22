@@ -25,7 +25,6 @@ const Home = () => {
         );
 
         if (isMounted) {
-          console.log({ data });
           setCount(data.pagination.totalPages);
           setAlbums(data.data);
           setIsLoading(false);

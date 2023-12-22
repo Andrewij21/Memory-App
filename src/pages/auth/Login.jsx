@@ -20,7 +20,6 @@ const Login = () => {
           withCredentials: true,
         }
       );
-      console.log({ response });
       const roles = response.data.data.roles;
       const accessToken = response.data.data.accessToken;
       const user = response.data.data.user;
